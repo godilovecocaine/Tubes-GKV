@@ -214,6 +214,7 @@ void lighting()
 	glMaterialfv(GL_FRONT, GL_SHININESS, high_shininess); 
 } 
 //----------------------------------------------------------------------
+// OBJEK
 void Grid() 
 {
 	 // Fungsi untuk membuat grid di "lantai" 
@@ -239,25 +240,103 @@ void Grid()
 	 glEnd(); 
 }
 
+void Strip()
+{
+	glPushMatrix();
+	glColor3f(1.0f,1.0f,1.0f);
+	glBegin(GL_QUADS); 
+	glVertex3f(-10, 0, 2); 
+	glVertex3f(-10, 0, -2); 
+	glVertex3f(10, 0, -2);
+	glVertex3f(10, 0, 2); 
+	glEnd(); 
+	glPopMatrix();
+}
+
 void Grid2()
 {
-	glColor3f(0.5f,0.25f,0.0f);
+	// Tempat Parkir
+	glPushMatrix();
+	glColor3f(0.25f,0.25f,0.25f);
 	glBegin(GL_QUADS); 
-	glVertex3f(-500, 0, 500); 
-	glVertex3f(-500, 0, -500); 
-	glVertex3f(500, 0, -500);
-	glVertex3f(500, 0, 500); 
+	glVertex3f(-200, 0, 200); 
+	glVertex3f(-200, 0, -200); 
+	glVertex3f(200, 0, -200);
+	glVertex3f(200, 0, 200); 
 	glEnd(); 
+	glPopMatrix();
+	
+	// Jalan
+	glPushMatrix();
+	glTranslatef(350, 0, 0);
+	glColor3f(0.0f,0.0f,0.0f);
+	glBegin(GL_QUADS); 
+	glVertex3f(-150, 0, 50); 
+	glVertex3f(-150, 0, -50); 
+	glVertex3f(150, 0, -50);
+	glVertex3f(150, 0, 50); 
+	glEnd(); 
+	glPopMatrix();
+	
+	glPushMatrix();
+	glRotated(90, 0, 1, 0);
+	glTranslatef(0, 0, 350);
+	glColor3f(0.0f,0.0f,0.0f);
+	glBegin(GL_QUADS); 
+	glVertex3f(-500, 0, 50); 
+	glVertex3f(-500, 0, -50); 
+	glVertex3f(500, 0, -50);
+	glVertex3f(500, 0, 50); 
+	glEnd(); 
+	glPopMatrix();
+}
+
+void Marka()
+{
+	glPushMatrix();
+	glTranslatef(225, 0.1, 0);
+	Strip();
+	glPopMatrix();
+	
+	glPushMatrix();
+	glTranslatef(265, 0.1, 0);
+	Strip();
+	glPopMatrix();
+	
+	glPushMatrix();
+	glTranslatef(305, 0.1, 0);
+	Strip();
+	glPopMatrix();
+	
+	glPushMatrix();
+	glTranslatef(345, 0.1, 0);
+	Strip();
+	glPopMatrix();
+	
+	glPushMatrix();
+	glTranslatef(385, 0.1, 0);
+	Strip();
+	glPopMatrix();
+	
+	glPushMatrix();
+	glTranslatef(425, 0.1, 0);
+	Strip();
+	glPopMatrix();
+	
+	glPushMatrix();
+	glTranslatef(465, 0.1, 0);
+	Strip();
+	glPopMatrix();
 }
 
 void Grid3()
 {
-	glColor3f(0.0f,0.0f,0.0f);
+	glColor3f(0.0f,0.75f,0.0f);
 	glBegin(GL_QUADS); 
-	glVertex3f(-50, 0.1, 50); 
-	glVertex3f(-50, 0.1, -50); 
-	glVertex3f(50, 0.1, -50);
-	glVertex3f(50, 0.1, 50); 
+	glVertex3f(-500, -0.1, 500); 
+	glVertex3f(-500, -0.1, -500); 
+	glVertex3f(500, -0.1, -500);
+	glVertex3f(500, -0.1, 500); 
 	glEnd(); 
 }
 
@@ -719,6 +798,7 @@ void Atap()
 	Balok(2,275,-120);
 	glPopMatrix();
 }
+
 void Gudang()
 {
 	// Dinding Belakang
@@ -773,6 +853,45 @@ void Gudang()
 	glPopMatrix;
 }
 
+void Pembatas()
+{
+	// Depan
+	glPushMatrix(); // Kanan
+	glColor3f(0.75,0.75,0.75);
+	glTranslatef(200,0,125);
+	Balok(2,150,-2);
+	glPopMatrix();
+	
+	glPushMatrix(); // Kiri
+	glColor3f(0.75,0.75,0.75);
+	glTranslatef(200,0,-125);
+	Balok(2,150,-2);
+	glPopMatrix();
+	
+	// Belakang
+	glPushMatrix();
+	glColor3f(0.75,0.75,0.75);
+	glTranslatef(-200,0,0);
+	Balok(2,398,-2);
+	glPopMatrix();
+	
+	// Kanan
+	glPushMatrix();
+	glRotated(90, 0, 1, 0);
+	glColor3f(0.75,0.75,0.75);
+	glTranslatef(-200,0,0);
+	Balok(2,402,-2);
+	glPopMatrix();
+	
+	// Kiri
+	glPushMatrix();
+	glRotated(-90, 0, 1, 0);
+	glColor3f(0.75,0.75,0.75);
+	glTranslatef(-200,0,0);
+	Balok(2,402,-2);
+	glPopMatrix();
+}
+
 void Object()
 {
 	glPushMatrix();
@@ -802,7 +921,9 @@ void display()
 	// Gambar grid 
 // 	Grid(); 
  	Grid2();
-// 	Grid3();
+ 	Marka();
+ 	Grid3();
+ 	Pembatas();
  	
 	// Gambar objek di sini... 
  	Object(); 

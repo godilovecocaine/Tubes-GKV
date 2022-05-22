@@ -759,6 +759,7 @@ int main(int argc, char **argv)
 	glutSpecialFunc(pressKey);
 	glutSpecialUpFunc(releaseKey); 
 	glutDisplayFunc(display); 
+	glClearColor(0.0f, 1.0f, 1.0f, 1.0f);
 	glutKeyboardFunc(keyboard);
 	glutIdleFunc(display); 
 	glutReshapeFunc(Reshape);

@@ -523,6 +523,66 @@ void Balok(float panjang,float lebar,float tinggi)
 	glPopMatrix();
 }
 
+void Segitiga(float panjang,float tinggi,float lebar)
+{
+	glPushMatrix();
+	float p=panjang/2;
+	float l=lebar/2;
+	float t=tinggi/2;
+	
+	//depan 
+	glBegin(GL_TRIANGLES); 
+	glVertex3f(-p,0,l); 
+	glVertex3f(p,0,l); 
+	glVertex3f(0,t,l);
+	glEnd();
+	
+	// belakang 
+	glBegin(GL_TRIANGLES);
+	glVertex3f(-p,0,-l); 
+	glVertex3f(p,0,-l); 
+	glVertex3f(0,t,-l);
+	glEnd();
+	
+ 	// bawah 
+ 	glBegin(GL_POLYGON);
+ 	glTexCoord2f(0.0f, 0.0f); 
+ 	glVertex3f(-p,0,l); 
+ 	glTexCoord2f(0.0f, 1.0f); 
+ 	glVertex3f(-p,0,-l); 
+ 	glTexCoord2f(1.0f, 0.0f); 
+ 	glVertex3f(p,0,-l); 
+ 	glTexCoord2f(1.0f, 1.0f); 
+ 	glVertex3f(p,0,l);
+	glEnd();
+	
+ 	// kanan 
+ 	glBegin(GL_POLYGON); 
+ 	glTexCoord2f(0.0f, 0.0f); 
+ 	glVertex3f(0,t,l); 
+ 	glTexCoord2f(1.0f, 0.0f); 
+ 	glVertex3f(0,t,-l); 
+ 	glTexCoord2f(0.0f, 1.0f); 
+ 	glVertex3f(p,0,-l); 
+ 	glTexCoord2f(1.0f, 1.0f); 
+ 	glVertex3f(p,0,l);
+	glEnd();
+ 
+	// kiri 
+ 	glBegin(GL_POLYGON);
+ 	glTexCoord2f(0.0f, 0.0f); 
+ 	glVertex3f(-p,0,l); 
+ 	glTexCoord2f(1.0f, 0.0f); 
+ 	glVertex3f(-p,0,-l); 
+ 	glTexCoord2f(0.0f, 1.0f); 
+ 	glVertex3f(0,t,-l); 
+ 	glTexCoord2f(1.0f, 1.0f); 
+ 	glVertex3f(0,t,l); 
+	glEnd();
+	
+	glPopMatrix();
+}
+
 void Roda(float alas,float up,float height)
 {
      float i;
@@ -661,11 +721,18 @@ void Atap()
 }
 void Gudang()
 {
-	//Dinding Belakang
+	// Dinding Belakang
 	glPushMatrix();
 	glColor3f(0.5,0.5,0.5);
 	glTranslatef(-125,0,0);
 	Balok(2,100,-100);
+	glPopMatrix();
+	
+	// Depan
+	glPushMatrix();
+	glColor3f(0.5,0.5,0.5);
+	glTranslatef(125,50,0);
+	Balok(2,100,-50);
 	glPopMatrix();
 	
 	// Dinding samping
@@ -676,12 +743,27 @@ void Gudang()
 	Balok(2,250,-100);
 	glPopMatrix();
 	
-//	glPushMatrix();
-//	glRotated(90, 0, 1, 0);
-//	glColor3f(0.5,0.5,0.5);
-//	glTranslatef(-50,0,-1); // Kanan
-//	Balok(2,900,-100);
-//	glPopMatrix();
+	glPushMatrix();
+	glRotated(90, 0, 1, 0);
+	glColor3f(0.5,0.5,0.5);
+	glTranslatef(-50,0,-1); // Kanan
+	Balok(2,250,-100);
+	glPopMatrix();
+	
+	// Segitiga
+	glPushMatrix();
+	glRotated(90, 0, 1, 0);
+	glColor3f(0.0,0.0,0.0);
+	glTranslatef(0,100,125);
+	Segitiga(100,62.5,2);
+	glPopMatrix();
+	
+	glPushMatrix();
+	glRotated(90, 0, 1, 0);
+	glColor3f(0.0,0.0,0.0);
+	glTranslatef(0,100,-125);
+	Segitiga(100,62.5,2);
+	glPopMatrix();
 	
 	// Atap
 	glPushMatrix();
@@ -697,26 +779,6 @@ void Object()
 	Truk();
 	Gudang();
 	glPopMatrix();
-	
-	
-//	// tangan kiri
-//	glPushMatrix();
-//	glColor3f(0.2,0.5,0.2);
-//	glTranslatef(0,-2,2.5);
-//	glRotatef(rotTangan1,1,0,0);
-//	glRotatef(rotTangan2,0,0,1);
-//	Balok(2,2,4);
-//	glPopMatrix();
-//	
-//	//tangan kanan
-//	glPushMatrix();
-//	glColor3f(0.2,0.5,0.2);
-//	glTranslatef(0,-2,-2.5);
-//	glRotatef(-rotTangan1,1,0,0);
-//	glRotatef(rotTangan2,0,0,1); 
-//	Balok(2,2,4);
-//	glPopMatrix();
-
 } 
 
 void display() 

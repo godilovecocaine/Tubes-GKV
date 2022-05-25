@@ -105,7 +105,7 @@ void keyboard(unsigned char key, int x, int y)
 		
 	if(drop==0)
 	{ //kondisi jika kotak tidak jatuh ke tanah
-		if (posXBadan > -122)//kondisi jika tidak menabrak dinding
+		if (posXBadan > -121)//kondisi jika tidak menabrak dinding
 		{ 
 			posXBadan -= 1;
 			if (bring == 1 )
@@ -853,6 +853,7 @@ void Gudang()
 	glPopMatrix;
 }
 
+
 void Pembatas()
 {
 	// Depan
@@ -892,11 +893,50 @@ void Pembatas()
 	glPopMatrix();
 }
 
+void Pohon()
+{
+	//Kanan
+	glPushMatrix(); // Batang Kanan
+	glColor3f(0.2f, 0.0f, 0.0f);
+	glTranslatef(290, 0, 70);
+	Balok(10, 10, -50);
+	glPopMatrix();
+	
+	glPushMatrix(); // Daun Kanan
+	glColor3f(0.0f, 1.0f, 0.0f);
+	glTranslatef(290, 50, 70);
+	Balok(30, 30, -30);
+	glPopMatrix();
+	
+	//Kiri
+	glPushMatrix(); // Batang Kiri
+	glColor3f(0.2f, 0.0f, 0.0f);
+	glTranslatef(290, 0, -70);
+	Balok(10, 10, -50);
+	glPopMatrix();
+	
+	glPushMatrix(); // Daun Kiri
+	glColor3f(0.0f, 1.0f, 0.0f);
+	glTranslatef(290, 50, -70);
+	Balok(30, 30, -30);
+	glPopMatrix();
+}
+
+void Palang()
+{
+	glPushMatrix();
+	glColor4f(1.0f, 1.0f, 0.0f, 0.0f);
+	glTranslatef(200, 115, -20);
+	Balok(5, 80, -5);
+	glPopMatrix();
+}
+
 void Object()
 {
 	glPushMatrix();
 	Truk();
 	Gudang();
+	Palang();
 	glPopMatrix();
 } 
 
@@ -919,11 +959,12 @@ void display()
  	glRotated(rotAngleZ, 0, 0, 1);
  	
 	// Gambar grid 
-// 	Grid(); 
+	//Grid(); 
  	Grid2();
  	Marka();
  	Grid3();
  	Pembatas();
+ 	Pohon();
  	
 	// Gambar objek di sini... 
  	Object(); 

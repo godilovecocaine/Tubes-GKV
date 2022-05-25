@@ -925,9 +925,24 @@ void Pohon()
 void Palang()
 {
 	glPushMatrix();
-	glColor4f(1.0f, 1.0f, 0.0f, 0.0f);
-	glTranslatef(200, 115, -20);
-	Balok(5, 80, -5);
+	glRotated(45, 1, 0, 0);
+	glColor4f(0.5f, 0.5f, 0.5f, 0.0f);
+	glTranslatef(210, 40, -70);
+	Balok(5, 125, -5);
+	glPopMatrix();
+	
+	glPushMatrix();
+	glRotated(90, 1, 0, 0);
+	glColor4f(0.5f, 0.5f, 0.5f, 0.0f);
+	glTranslatef(205, -60, -120);
+	Balok(5, 20, -5);
+	glPopMatrix();
+	
+	glPushMatrix();
+	glRotated(90, 1, 0, 0);
+	glColor4f(0.5f, 0.5f, 0.5f, 0.0f);
+	glTranslatef(215, -60, -120);
+	Balok(5, 20, -5);
 	glPopMatrix();
 }
 

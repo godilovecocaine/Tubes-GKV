@@ -46,9 +46,9 @@ void init(void)
 { 
 	glEnable (GL_DEPTH_TEST); 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); 
-	IDquadric=gluNewQuadric(); // Create A Pointer To The Quadric Object ( NEW )
-	gluQuadricNormals(IDquadric, GLU_SMOOTH); // Create Smooth Normals ( NEW )
-	gluQuadricTexture(IDquadric, GL_TRUE); // Create Texture Coords ( NEW )
+	IDquadric=gluNewQuadric();
+	gluQuadricNormals(IDquadric, GLU_SMOOTH);
+	gluQuadricTexture(IDquadric, GL_TRUE);
 } 
 void Reshape(int w1, int h1) 
 { 
@@ -69,7 +69,7 @@ void Reshape(int w1, int h1)
 
 void orientMe(float ang) 
 {
-	// Fungsi ini untuk memutar arah kamera (tengok kiri/kanan) 
+	// Fungsi ini untuk memutar arah kamera (putar kiri atau kanan) 
 	lx = sin(ang/10); 
 	lz = -cos(ang/10); 
 	glLoadIdentity(); 
@@ -104,7 +104,7 @@ void keyboard(unsigned char key, int x, int y)
 	case 'o':
 		
 	if(drop==0)
-	{ //kondisi jika kotak tidak jatuh ke tanah
+	{ //kondisi jika truk menabrak dinding belakang
 		if (posXBadan > -121)//kondisi jika tidak menabrak dinding
 		{ 
 			posXBadan -= 1;
@@ -112,13 +112,6 @@ void keyboard(unsigned char key, int x, int y)
 			{
 				posXKotak -= 1;
 			}
- 		}
- 	}
-	else
-	{
- 		if (posXBadan >posXKotak+3)
-		{ //kondisi jika tidak menabrak kotak
- 			posXBadan -= 1;
  		}
  	}
 	break; 
@@ -132,17 +125,6 @@ void keyboard(unsigned char key, int x, int y)
  	} 
 	break; 
 	
- 	case 'g': 
- 	gerakTangan = 1; break; 
- 	
- 	case 't': 
- 	if (posXBadan>=8)
-	{ //kondisi kotak telah diluar meja
- 		drop = 1; 
- 		gerakTangan =3;
-	}
-	break; 
- 
  	case 32:
  	rotAngleX=rotAngleY=rotAngleZ=0;
 	posXBadan=10, posXKotak=0, posYBadan=7, posYKotak=6;
@@ -215,31 +197,6 @@ void lighting()
 } 
 //----------------------------------------------------------------------
 // OBJEK
-void Grid() 
-{
-	 // Fungsi untuk membuat grid di "lantai" 
-	 double i; 
-	 const float Z_MIN = -500, Z_MAX = 500; 
-	 const float X_MIN = -500, X_MAX = 500; 
-	 const float gap = 2; 
-	 glColor3f(0.5, 0.25, 0); 
-	 glBegin(GL_LINES);
-	 
-	 for(i=Z_MIN;i<Z_MAX;i+=gap) 
-	 { 
-		 glVertex3f(i, 0, Z_MIN); 
-		 glVertex3f(i, 0, Z_MAX); 
-	 } 
-	 
-	 for(i=X_MIN;i<X_MAX;i+=gap) 
-	 { 
-		 glVertex3f(X_MIN, 0, i); 
-		 glVertex3f(X_MAX, 0, i); 
-	 }
-	 
-	 glEnd(); 
-}
-
 void Strip()
 {
 	glPushMatrix();
@@ -958,7 +915,7 @@ void Object()
 void display() 
 { 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
- 	// Kalau move dan angle tidak nol, gerakkan kamera... 
+ 	// Kalau move dan angle tidak nol, gerakkan kamera
  	if (deltaMove) 
  	moveMeFlat(deltaMove);
  	
@@ -974,14 +931,13 @@ void display()
  	glRotated(rotAngleZ, 0, 0, 1);
  	
 	// Gambar grid 
-	//Grid(); 
  	Grid2();
  	Marka();
  	Grid3();
  	Pembatas();
  	Pohon();
  	
-	// Gambar objek di sini... 
+	// Gambar objek di sini
  	Object(); 
 	glPopMatrix(); 
 	glFlush(); 

@@ -1,5 +1,3 @@
-// === TUGAS BESAR ===
-// === Praktikum GKV ===
 /*
 1. Aprilyanto Setiyawan Siburian - 24060121120022
 2. Adri Audifirst - 24060121140152
